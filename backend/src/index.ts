@@ -4,6 +4,9 @@ import authRoute from "./routes/auth.route";
 
 import { authVerification } from "./middleware";
 import cors from "cors";
+import subjectRoute from "./routes/subject.route";
+import quizsRoute from "./routes/quizs.route";
+import quizRoute from "./routes/quizQuestion.route";
 
 var app = express();
 app.use(cors({ origin: process.env.ALLOW_ORIGIN }));
@@ -16,6 +19,12 @@ const server = app.listen(process.env.PORT || 3000, async () => {
   await clearSeed();
   seed();
 });
+
+app.use("/subject", authVerification, subjectRoute);
+
+app.use("/quizs", authVerification, quizsRoute);
+
+app.use("/quiz", authVerification, quizRoute);
 
 app.get("/", authVerification, (req, res) => {
   res.json("api route /");

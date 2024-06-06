@@ -12,49 +12,70 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-model User {
+model Admin {
   id    Int     @default(autoincrement()) @id
   email String  @unique
 	password String
   name  String?
+	 createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-	user_quiz_data User_quiz_data[]
+
 }
+
+model Subject{
+	id    Int     @default(autoincrement()) @id
+	name String
+
+	subject_id Int?   
+	 subject Subject? @relation("baseSubject",fields:[subject_id],references: [id],onDelete: Cascade)
+	baseSubject Subject[]  @relation("baseSubject")
+	 createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+	quiz Quiz[]
+
+	
+}
+
 
 model Quiz{
 		id    Int     @default(autoincrement()) @id
-		category String
-questions  Quiz_question[]
-	user_quiz_data User_quiz_data[]
+		name String
+		level Int
+questions  Question[]
+ subject Subject @relation(fields:[subject_id],references: [id],onDelete: Cascade)
+subject_id Int
+
+ createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
 }
 
-model Quiz_question{
+model Question{
  id    Int     @default(autoincrement()) @id
  question String
- quiz Quiz @relation(fields:[quiz_id],references: [id])
+ quiz Quiz @relation(fields:[quiz_id],references: [id],onDelete: Cascade)
 quiz_id Int
 
-option Options @relation(fields:[option_id],references: [id])
-option_id Int
+
+options Option[]
+
+ createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
 }
 
-model Options{
+model Option{
 	id    Int     @default(autoincrement()) @id
+	description String
+	isRight Boolean
 	
-Quiz_question Quiz_question[]
-}
+questions Question @relation(fields:[question_id],references: [id],onDelete: Cascade)
+question_id Int
 
-model User_quiz_data{
-	id    Int     @default(autoincrement()) @id
-	user_id Int
-	quiz_id Int
+ createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-	user User @relation(fields: [user_id],references: [id])
-	quiz Quiz @relation(fields: [quiz_id],references: [id])
-
-	score Int
-	attempted Int
 
 }
