@@ -1,17 +1,6 @@
 import { Button } from "@radix-ui/themes";
-import { useState } from "react";
-import useLoaderContext from "../context/LoaderContext";
-import { useNavigate } from "react-router-dom";
-import useAuthContext from "../context/AuthContext";
-import { SignupErrorType, SignupType } from "../types";
 
 const SignUp = () => {
-  const [data, setData] = useState<SignupType>({ email: "", password: "" });
-  const [errors, setErrors] = useState<SignupErrorType | null>();
-  const { setLoader } = useLoaderContext();
-  const navigate = useNavigate();
-  const { user } = useAuthContext();
-
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto md:h-screen lg:py-0">

@@ -20,11 +20,11 @@ import { useParams } from "react-router-dom";
 const AddEditQuestion = ({
   open,
   setOpen,
-  editQuizId,
+  editQuestionId,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  editQuizId: string | null;
+  editQuestionId: string | null;
 }) => {
   const { setLoader } = useLoaderContext();
 
@@ -77,8 +77,8 @@ const AddEditQuestion = ({
   }
 
   useEffect(() => {
-    if (editQuizId && open) {
-      getDataById(editQuizId);
+    if (editQuestionId && open) {
+      getDataById(editQuestionId);
     }
   }, [open]);
 
@@ -103,10 +103,10 @@ const AddEditQuestion = ({
               isRight: data.isRight == i,
             };
           }
-          if (editQuizId) {
+          if (editQuestionId) {
             response = await axios.put(
               import.meta.env.VITE_API_URL +
-                `/quiz/${id}/question/${editQuizId}`,
+                `/quiz/${id}/question/${editQuestionId}`,
               {
                 question: data.question,
                 options,
@@ -294,7 +294,7 @@ const AddEditQuestion = ({
           </Dialog.Close>
           <Dialog.Close>
             <Button onClick={handleSubmit}>
-              {editQuizId ? "Update" : "Add"}
+              {editQuestionId ? "Update" : "Add"}
             </Button>
           </Dialog.Close>
         </Flex>

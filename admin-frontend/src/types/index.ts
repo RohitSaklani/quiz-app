@@ -1,15 +1,5 @@
 import { z } from "zod";
 
-// export const QuizSchema = z.object({
-//   question: z
-//     .string({ message: "question must be string" })
-//     .min(5, { message: "question must be 5 chars" }),
-//   category: z.string().min(5, { message: "question must be 5 chars" }),
-//   answer: z.string().min(5, { message: "question must be 5 chars" }),
-// });
-// export type QuizType = z.infer<typeof QuizSchema>;
-// export type QuizErrorType = z.inferFormattedError<typeof QuizSchema>;
-
 export const LoginSchema = z.object({
   email: z.string().min(1, { message: "Email is required" }).email(),
   password: z.string().min(1, { message: "password is required" }),

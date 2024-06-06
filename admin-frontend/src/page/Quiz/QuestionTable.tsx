@@ -1,4 +1,4 @@
-import { Box, Container, Flex, IconButton, Text } from "@radix-ui/themes";
+import { Flex, IconButton, Text } from "@radix-ui/themes";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useLoaderContext from "../../context/LoaderContext";
@@ -14,7 +14,7 @@ export function QuestionTable() {
 
   const [questionList, setQuestionList] = useState([]);
 
-  const [editQuizId, setEditQuizId] = useState<string | null>(null);
+  const [editQuestionId, setEditQuestionId] = useState<string | null>(null);
 
   const [open, setOpen] = useState(false);
   const { setLoader } = useLoaderContext();
@@ -64,68 +64,66 @@ export function QuestionTable() {
   useEffect(() => {
     if (!open) {
       getData();
-      setEditQuizId(null);
+      setEditQuestionId(null);
     }
   }, [open]);
 
   return (
-    <Flex>
-      <div className="my-5    flex flex-row  flex-wrap  justify-start	">
+    <div className="my-5    flex flex-row  flex-wrap  justify-center 	">
+      {" "}
+      <Flex justify={"between"} className="m-[2rem] mx-[4rem] w-[100%]">
         {" "}
-        {/* <Flex justify={"between"} className="m-[2rem] mx-[4rem] w-[100%]">
-          {" "}
-          <Text className="text-3xl font-normal">Questions</Text>
-          <AddEditQuestion
-            open={open}
-            setOpen={setOpen}
-            editQuizId={editQuizId}
-          />{" "}
-        </Flex> */}
-        {questionList.map((ele: any, index: number) => (
-          <Flex
-            direction={"column"}
-            className=" md:w-[600px] lg:min-w-[600px] m-3 border-2 p-2 rounded-md"
-          >
-            {/* w-[95vw] sm:w-[95vw] */}
-            <div className="text-lg my-1">
-              <span className="font-medium">{index + 1 + ")- "}</span>{" "}
-              <span className=""> {" " + ele.question}</span>
-            </div>
-            <Flex direction={"column"} className="w-full pl-3" wrap={"wrap"}>
-              {ele.options.map((option: any, index: number) => (
-                <div className="flex  items-center gap-2">
-                  {optionNumber[index + 4] + ")- " + option.description}{" "}
-                  <span>
-                    {" "}
-                    {option.isRight ? <FaCheck color="green" /> : null}
-                  </span>
-                </div>
-              ))}
-            </Flex>
-            <div className="flex justify-end items-end gap-2 my-2 flex-grow">
-              {" "}
-              <IconButton
-                size="1"
-                variant="soft"
-                onClick={() => {
-                  setOpen(true);
-                  setEditQuizId(ele.id);
-                }}
-              >
-                <FaRegEdit />
-              </IconButton>
-              <IconButton
-                size="1"
-                variant="soft"
-                color="red"
-                onClick={() => deleteQuestion(ele.id)}
-              >
-                <MdDeleteOutline />
-              </IconButton>
-            </div>
+        <Text className="text-3xl font-normal">Questions</Text>
+        <AddEditQuestion
+          open={open}
+          setOpen={setOpen}
+          editQuestionId={editQuestionId}
+        />{" "}
+      </Flex>
+      {questionList.map((ele: any, index: number) => (
+        <Flex
+          direction={"column"}
+          className="w-[95vw] sm:w-[95vw] md:w-[600px] lg:min-w-[600px] m-3 border-2 p-2 rounded-md "
+        >
+          {/* w-[95vw] sm:w-[95vw] md:w-[600px] lg:min-w-[600px]*/}
+          <div className="text-lg my-1">
+            <span className="font-medium">{index + 1 + ")- "}</span>{" "}
+            <span className=""> {" " + ele.question}</span>
+          </div>
+          <Flex direction={"column"} className="w-full pl-3" wrap={"wrap"}>
+            {ele.options.map((option: any, index: number) => (
+              <div className="flex  items-center gap-2">
+                {optionNumber[index + 4] + ")- " + option.description}{" "}
+                <span>
+                  {" "}
+                  {option.isRight ? <FaCheck color="green" /> : null}
+                </span>
+              </div>
+            ))}
           </Flex>
-        ))}
-      </div>
-    </Flex>
+          <div className="flex justify-end items-end gap-2 my-2 flex-grow">
+            {" "}
+            <IconButton
+              size="1"
+              variant="soft"
+              onClick={() => {
+                setOpen(true);
+                setEditQuestionId(ele.id);
+              }}
+            >
+              <FaRegEdit />
+            </IconButton>
+            <IconButton
+              size="1"
+              variant="soft"
+              color="red"
+              onClick={() => deleteQuestion(ele.id)}
+            >
+              <MdDeleteOutline />
+            </IconButton>
+          </div>
+        </Flex>
+      ))}
+    </div>
   );
 }
