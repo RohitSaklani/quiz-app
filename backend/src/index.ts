@@ -10,6 +10,7 @@ import quizRoute from "./routes/quizQuestion.route";
 
 var app = express();
 app.use(cors({ origin: process.env.ALLOW_ORIGIN }));
+//app.use(cors(corsOptions));
 
 app.use(express.json());
 
