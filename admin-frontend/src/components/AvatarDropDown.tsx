@@ -30,7 +30,7 @@ const AvatarDropDown = () => {
           <DropdownMenu.Item
             onClick={() => {
               localStorage.clear();
-              navigate("/login");
+              navigate(0);
             }}
             className="hover:bg-slate-300 group text-[15px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative  select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
           >

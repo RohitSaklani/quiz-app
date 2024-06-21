@@ -2,7 +2,12 @@ import jwt from "jsonwebtoken";
 export const authVerification = (req: any, res: any, next: any) => {
   try {
     const headers = req.headers;
-    console.log("headers : ", headers);
+
+    console.log(
+      ` REQUEST : ${req.protocol}://${req.get("host")}${
+        req.originalUrl
+      }  Method: ${req.method},`
+    );
 
     if (headers.token) {
       const token = Array.isArray(headers.token)
@@ -20,7 +25,7 @@ export const authVerification = (req: any, res: any, next: any) => {
         }
       );
 
-      console.log("verify : ", verify);
+      // console.log("verify : ", verify);
     } else {
       res.status(401).json({ message: "JWT token missing" });
     }

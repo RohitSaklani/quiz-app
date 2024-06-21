@@ -45,7 +45,6 @@ export default App;
 
 function ProtectedRoute() {
   let user = useAuthContext();
-  console.log("user : ", user);
 
   if (user?.user) {
     return (

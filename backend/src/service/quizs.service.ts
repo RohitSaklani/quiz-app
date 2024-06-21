@@ -2,7 +2,6 @@ import prisma from "../db/db";
 import { QuizType } from "../types";
 
 export async function createQuiz(data: QuizType) {
-  console.log("quiz data : ", data);
   const result = await prisma.quiz.create({ data });
   return result;
 }

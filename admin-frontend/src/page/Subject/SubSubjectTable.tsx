@@ -151,7 +151,6 @@ export function SubSubjectTable() {
         toast.success(response.data.message);
         getData();
       }
-      console.log("resposne : ", response);
     } catch (e) {
       console.log("error : ", e);
     } finally {
@@ -174,7 +173,6 @@ export function SubSubjectTable() {
 
         setSubSubjectData(data);
         // setSubSubjectData(subSubject);
-        console.log("resposne Sub : ", responseSub);
       }
     } catch (e) {
       console.log("error : ", e);

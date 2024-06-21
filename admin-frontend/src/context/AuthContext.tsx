@@ -45,13 +45,10 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
 
         setUser(res.data.user);
       } else {
-        console.log(
-          "navigation to login !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        );
         navigate("/login");
       }
     } catch (err) {
-      console.log("conetxt : ", err);
+      console.log("ERR : ", err);
     } finally {
       //setTimeout(() => setLoader({ isLoading: false }), 2000);
       setLoad(false);
@@ -60,7 +57,6 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    console.log("authcontext rendered again");
     verify();
   }, []);
 

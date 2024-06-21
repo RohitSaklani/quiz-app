@@ -2,7 +2,6 @@ import prisma from "../db/db";
 import { OptionType, QuestionType } from "../types";
 
 export async function createQuestion(data: QuestionType) {
-  console.log("question data : ", data);
   const result = await prisma.question.create({ data });
   return result;
 }

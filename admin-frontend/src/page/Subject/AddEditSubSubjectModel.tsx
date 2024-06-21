@@ -37,8 +37,6 @@ const AddEditSubSubjectModel = ({
 
   const [baseSubjectData, setBaseSubjectData] = useState([]);
 
-  console.log("editSubSubjectId : ", editSubSubjectId);
-
   async function getDataById(id: string) {
     setLoader({ isLoading: true });
     try {
@@ -54,12 +52,6 @@ const AddEditSubSubjectModel = ({
           subject: String(response.data.result.subject_id),
         });
       }
-      console.log(
-        "resposne inside sub subject  model : ",
-        typeof response.data.result.subject_id,
-        "  ",
-        response.data.result.subject_id
-      );
     } catch (e) {
       console.log("error : ", e);
     } finally {
@@ -81,8 +73,6 @@ const AddEditSubSubjectModel = ({
 
         setBaseSubjectData(data);
         // setSubSubjectData(subSubject);
-
-        console.log("sub subject data ", data);
       }
     } catch (e) {
       console.log("error : ", e);
@@ -92,12 +82,6 @@ const AddEditSubSubjectModel = ({
   }
 
   useEffect(() => {
-    console.log(
-      "editsubSubjectId : ",
-      typeof editSubSubjectId,
-      "  ",
-      editSubSubjectId
-    );
     getData();
     if (editSubSubjectId) {
       getDataById(editSubSubjectId);
@@ -110,13 +94,11 @@ const AddEditSubSubjectModel = ({
       e.preventDefault();
       setErrors(null);
       const validation = SubSubjectSchema.safeParse(data);
-      console.log("validation : ", validation);
-      console.log("data : ", data);
+
       if (validation.success) {
         try {
           const token = localStorage.getItem("token");
           let response;
-          console.log("editBaseSubjectId inside api req ", editSubSubjectId);
           if (editSubSubjectId) {
             response = await axios.put(
               import.meta.env.VITE_API_URL + `/subject/sub/${editSubSubjectId}`,
@@ -130,8 +112,6 @@ const AddEditSubSubjectModel = ({
               { headers: { token } }
             );
           }
-
-          console.log("  response  :  ", response);
 
           if (response.status === 200) {
             setOpen(false);
@@ -192,7 +172,6 @@ const AddEditSubSubjectModel = ({
               value={data?.subject}
               onValueChange={
                 (e) => {
-                  console.log("selected : ", e);
                   setData({ ...data, subject: e });
                 }
                 //setData({ ...data, subject: Number(e)

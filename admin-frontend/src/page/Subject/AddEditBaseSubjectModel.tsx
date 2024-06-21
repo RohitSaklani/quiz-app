@@ -37,7 +37,6 @@ const AddEditBaseSubjectModel = ({
       if (response.status == 200) {
         setData({ ...data, name: response.data.result.name });
       }
-      console.log("resposne inside model : ", response);
     } catch (e) {
       console.log("error : ", e);
     } finally {
@@ -46,12 +45,6 @@ const AddEditBaseSubjectModel = ({
   }
 
   useEffect(() => {
-    console.log(
-      "editBaseSubjectId : ",
-      typeof editBaseSubjectId,
-      "  ",
-      editBaseSubjectId
-    );
     if (editBaseSubjectId) {
       getDataById(editBaseSubjectId);
     }
@@ -63,12 +56,11 @@ const AddEditBaseSubjectModel = ({
       e.preventDefault();
       setErrors(null);
       const validation = BaseSubjectSchema.safeParse(data);
-      console.log("validation : ", validation);
+
       if (validation.success) {
         try {
           const token = localStorage.getItem("token");
           let response;
-          console.log("editBaseSubjectId inside api req ", editBaseSubjectId);
           if (editBaseSubjectId) {
             response = await axios.put(
               import.meta.env.VITE_API_URL +

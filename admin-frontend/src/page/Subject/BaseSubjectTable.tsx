@@ -146,7 +146,6 @@ export function BaseSubjectTable() {
         toast.success(response.data.message);
         getData();
       }
-      console.log("resposne : ", response);
     } catch (e) {
       console.log("error : ", e);
     } finally {
